@@ -23,11 +23,11 @@ def transaction():
         return "Transaction submission succesful\n"
 
 
-@node.route('/mine', methods=['GET'])
-def mine():
-    this_nodes_transactions.append(
-        {"from": "network", "to": miner_address, "amount": 1}
-    )
+@node.route('/generate', methods=['GET'])
+def generate_block():
+    #this_nodes_transactions.append(
+    #    {"from": "network", "to": miner_address, "amount": 1}
+    #)
 
     last_block = blockchain[len(blockchain) - 1]
     new_block_data = {
@@ -52,6 +52,26 @@ def mine():
         "data": new_block_data,
         "hash": last_block_hash
     }) + "\n"
+
+
+@node.route('/blocks', methods=['GET'])
+def get_blocks():
+    chain_to_send = []
+    for block in blockchain:
+        block_index = str(block.index)
+        block_timestamp = str(block.timestamp)
+        block_data = block.data
+        block_hash = block.hash
+        block = {
+            "index": block_index,
+            "timestamp": block_timestamp,
+            "data": block_data,
+            "hash": block_hash
+        }
+        chain_to_send.append(block)
+
+    chain_to_send = json.dumps(chain_to_send)
+    return chain_to_send
 
 
 node.run()
