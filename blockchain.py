@@ -1,5 +1,3 @@
-from flask import Flask
-
 import hashlib as hasher
 import datetime as date
 
@@ -51,4 +49,6 @@ def test_blockchain():
         print("Hash: {}\n".format(block_to_add.hash))
 
 
-test_blockchain()
+blockchain = [create_genesis_block()]
+
+#test_blockchain()
