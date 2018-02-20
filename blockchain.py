@@ -22,7 +22,7 @@ class Block:
 
 # Generate genesis block
 def create_genesis_block():
-    return Block(0, date.datetime.now(), "Genesis Block", "0")
+    return Block(0, date.datetime.now(), {"text": "Genesis Block", "proof-of-work": 1}, "0")
 
 
 # Generate next block for loop
